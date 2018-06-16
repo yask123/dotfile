@@ -71,8 +71,6 @@ Plug 'rizzatti/dash.vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'arcticicestudio/nord-vim'
 Plug 'justinmk/vim-sneak'
-Plug 'xolox/vim-notes'
-Plug 'xolox/vim-misc'
 call plug#end()
 
 " Use ripgrep
