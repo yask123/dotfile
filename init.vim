@@ -373,3 +373,7 @@ noremap <C-v> :vsplit<CR>
 noremap <C-q> :q <cr>
 let g:sneak#label = 1
 let g:tmux_navigator_disable_when_zoomed = 1
+set omnifunc=syntaxcomplete#Complete
+map <C-u> 10k
+map <C-d> 10j
+set formatoptions-=cro "Disable auto comments
