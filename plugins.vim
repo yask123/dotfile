@@ -70,11 +70,45 @@ call plug#end()
 set grepprg=rg\ --vimgrep
 
 " enable AutoSave on Vim startup
+
 let g:auto_save = 1
-"Deoplete
+"Deoplete stuff
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
 set completeopt-=preview
 
 let g:UltiSnipsExpandTrigger="<C-J>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+let g:deoplete#omni#functions = {}
+let g:deoplete#omni_patterns = {}
+
+let s:default_sources = ['syntax', 'tag', 'buffer', 'file', 'ultisnips']
+let g:deoplete#sources = {}
+let g:deoplete#sources._ = s:default_sources
+let g:deoplete#sources.go = ['go'] + s:default_sources
+let g:deoplete#sources.javascript = ['flow'] + s:default_sources
+
+let g:deoplete#sources.ruby = ['tag', 'solargraph', 'buffer', 'file', 'ultisnips']
+let g:deoplete#sources.eruby = ['tag', 'solargraph', 'buffer', 'file', 'ultisnips']
+
+if (exists('g:deoplete_loaded') && g:deoplete_loaded)
+    call deoplete#custom#source('_', 'matchers', ['matcher_length', 'matcher_full_fuzzy'])
+    call deoplete#custom#source('_', 'disabled_syntaxes', ['String'])
+    call deoplete#custom#source('_', 'converters', ['converter_remove_overlap', 'converter_remove_paren'])
+    call deoplete#custom#source('_', 'sorters', ['sorter_rank', 'sorter_word'])
+    " call deoplete#custom#source('neosnippet', 'rank', 1000)
+    call deoplete#custom#source('buffer', 'rank', 100)
+    call deoplete#custom#source('around', 'rank', 200)
+    call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy'])
+    let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
+    call deoplete#custom#var('omni', 'input_patterns', {
+                \ 'ruby': ['[^. *\t]\.\w*', '[a-zA-Z_]\w*::'],
+                \ 'java': '[^. *\t]\.\w*',
+                \ 'php': '\w+|[^. \t]->\w*|\w+::\w*',
+                \})
+    call deoplete#custom#var('omni', 'functions', {
+                \ 'lua': 'xolox#lua#omnifunc',
+                \ })
+endif
