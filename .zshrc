@@ -143,7 +143,7 @@ alias prebase='git pull rebase'
 alias pull='git pull'
 alias push='git push origin HEAD'
 alias stash='git stash'
-alias status='git status'
+alias s='git status'
 alias ammend='git commit --amend'
 alias n='vim ~/notes.md'
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

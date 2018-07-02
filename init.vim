@@ -30,7 +30,10 @@ set softtabstop=2 " number of spaces in tab when editing
 set splitbelow
 set splitright
 set tabstop=2 shiftwidth=2 " number of visual spaces per TAB
-set ttimeoutlen=10
+" set ttimeoutlen=10
+" set timeoutlen=1000 ttimeoutlen=0
+set formatoptions-=cro "Disable auto comments
+
 set ttyfast
 if !has('nvim')
   set ttymouse=xterm2
@@ -104,6 +107,7 @@ nmap <F8> :TagbarToggle<CR>
 
 augroup configgroup
     autocmd!
+    autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
     autocmd VimEnter * highlight clear SignColumn
     autocmd FileType ruby setlocal tabstop=2
     autocmd FileType ruby setlocal shiftwidth=2
@@ -196,22 +200,6 @@ function! CreatePost(title)
 endfunction
 command! -nargs=* CreatePost call CreatePost(<args>)
 
-function! Push()
-  execute '!git push origin HEAD'
-endfunction
-command! Push call Push()
-
-function! ForceUpdate()
-  execute '!git add .'
-  execute '!git commit --amend'
-  execute '! git push origin HEAD -f'
-endfunction
-command! ForceUpdate call ForceUpdate()
-
-function! s:Notes()
-  e ~/notes.md
-endfunction
-command! Notes call s:Notes()
 " Zoom / Restore window.
 function! s:ZoomToggle() abort
     if exists('t:zoomed') && t:zoomed
@@ -373,7 +361,22 @@ noremap <C-v> :vsplit<CR>
 noremap <C-q> :q <cr>
 let g:sneak#label = 1
 let g:tmux_navigator_disable_when_zoomed = 1
-set omnifunc=syntaxcomplete#Complete
+" set omnifunc=syntaxcomplete#Complete
 map <C-u> 10k
 map <C-d> 10j
-set formatoptions-=cro "Disable auto comments
+" Required for operations modifying multiple buffers like rename.
+set hidden
+
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+    \ 'javascript': ['javascript-typescript-stdio'],
+    \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
+    \ 'python': ['pyls'],
+    \ }
+
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+" Or map each action separately
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+

@@ -3,21 +3,16 @@ let g:ale_emit_conflict_warnings = 0
 
 call plug#begin('~/.config/nvim/plugged')
 " Deoplete
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'uplus/deoplete-solargraph', { 'for': 'ruby' }
-Plug 'fishbullet/deoplete-ruby'
-Plug 'zchee/deoplete-jedi'
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " Theme
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
-Plug 'joshdick/onedark.vim'
 Plug 'chriskempson/base16-vim'
-Plug 'dracula/vim', { 'as': 'dracula' }
 " Git stuff
 Plug 'airblade/vim-gitgutter'
 
@@ -59,7 +54,6 @@ Plug 'gf3/molotov'
 Plug 'nanotech/jellybeans.vim'
 Plug 'ervandew/supertab'
 Plug 'benmills/vimux'
-Plug 'raghur/vim-ghost', {'do': ':GhostInstall'}
 Plug 'wojtekmach/vim-rename'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'gf3/molotov'
@@ -68,7 +62,6 @@ Plug 'tyru/open-browser.vim'
 Plug 'jreybert/vimagit'
 Plug 'tpope/vim-rhubarb'
 Plug 'rizzatti/dash.vim'
-Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'arcticicestudio/nord-vim'
 Plug 'justinmk/vim-sneak'
 call plug#end()
@@ -80,7 +73,7 @@ set grepprg=rg\ --vimgrep
 let g:auto_save = 1
 "Deoplete
 let g:deoplete#enable_at_startup = 1
-" set completeopt-=preview
+set completeopt-=preview
 
 let g:UltiSnipsExpandTrigger="<C-J>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
