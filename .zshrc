@@ -145,8 +145,9 @@ alias push='git push origin HEAD'
 alias stash='git stash'
 alias s='git status'
 alias ammend='git commit --amend'
-alias n='vim ~/notes.md'
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 alias gh="open \`git remote -v | grep git@github.com | grep fetch | head -1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/http:\/\//'\`"
 alias c='clear'
-
+alias bn='cd ~/notes && vim `fzf --preview="cat {}" --preview-window=right:70%:wrap`'
+alias n='~/fuz.sh'
+alias e='exit'

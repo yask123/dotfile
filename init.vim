@@ -77,8 +77,8 @@ noremap <leader>t :TestNearest<CR>
 noremap <leader>T :TestFile<CR>
 noremap <leader>r :redraw!<CR>
 
-nmap <F2> :NERDTreeToggle<CR>
-imap <F2> <esc>:NERDTreeToggle<CR>
+nmap <F3> :NERDTreeToggle<CR>
+imap <F3> <esc>:NERDTreeToggle<CR>
 
 " Mapping jj to <esc>
 imap jj <esc>
@@ -302,7 +302,9 @@ smap <C-J> <Plug>snipMateNextOrTrigger
 " Set 256 colours, dark background, and molotov
 
 
+" Autocorrect last spelling mistake
 inoremap <C-L> <C-G>u<Esc>[s1z=`]a<C-G>u
+
 nnoremap <Leader>sW :execute ":Rg! " . expand("<cWORD>")<CR>
 nnoremap <Leader>sw :execute ":Rg! " . expand("<cword>")<CR>
 let test#strategy = 'vimux'
@@ -335,16 +337,7 @@ augroup END
 " }}}
 let g:airline_theme='jellybeans'
 let g:airline#extensions#tabline#enabled = 0
-let rubyfold = 1
-autocmd FileType ruby setlocal foldmethod=syntax
 
-map nm ]m
-map mn [m
-noremap <leader>s :vnew ~/test.rb <cr>
-function! s:Scratch()
-  vnew ~/scratch.rb
-endfunction
-command! Scratch call s:Scratch()
 " let g:airline#extensions#tabline#enabled = 1
 
 nnoremap 0 $
@@ -362,11 +355,6 @@ noremap <C-q> :q <cr>
 let g:sneak#label = 1
 let g:tmux_navigator_disable_when_zoomed = 1
 " set omnifunc=syntaxcomplete#Complete
-map <C-u> 10k
-map <C-d> 10j
-" Required for operations modifying multiple buffers like rename.
-set hidden
-
 let g:LanguageClient_serverCommands = {
       \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
       \ 'javascript': ['javascript-typescript-stdio'],
@@ -385,3 +373,9 @@ inoremap <A-j> <Esc>:m .+1<CR>==gi
 inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
+let g:vim_markdown_conceal = 0
+set foldmethod=syntax
+nmap <space> za
+let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:badwolf_darkgutter = 1
+noremap <Leader>y "*y
